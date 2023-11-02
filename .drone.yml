@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: my-first-build
+
+steps:
+  - name: build
+    image: alpine
+    environment:
+      abc: hello
+      dp:
+        from_secret: sa
+    commands:
+      - echo "build step executed"
+      - echo "$dp" > file123.txt
+      - cat file123.txt
+      - echo "$abc"
+
+  - name: test
+    image: alpine
+    environment: 
+      sec:
+        from_secret: sc
+    commands:
+      - source .env
+      - echo "$FIRST $SECOND $THIRD"
+
+  - name: deploy
+    image: alpine
+    commands:
+      -
