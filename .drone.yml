@@ -27,4 +27,4 @@ steps:
   - name: deploy
     image: alpine
     commands:
-      -
+      - echo "deploy"
